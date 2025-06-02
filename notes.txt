@@ -1,0 +1,52 @@
+//after adding spring-security dependency & reload web browser=> it asks for username & password on=> http://localhost:8081/login
+//username is "user"    //bydefault
+//password is generated in terminal as output. eg: "e932f572-88d3-4431-9b36-61540bc18347" is password by terminal
+
+//after login , u can logout also on => http://localhost:8081/logout
+
+//form login=> is bydefault authentication by springboot
+
+//now we can configure username & password in application.properties file=>
+eg:
+spring.security.user.name=samarth
+spring.security.user.password=samarth
+
+//notes by durgesh=> https://www.learncodewithdurgesh.com/blogs/jwt-authentication-with-spring-boot-31#google_vignette
+
+//configuring username & password through java code => by Appconfig
+
+//jwt authentication flow=> Json web token
+
+//token=> eg: token for panipuri
+
+//jwt has format=> 3 data is encoded in token
+x.y.z
+x=> is algorithm & token type(header part)
+y=> payload or data
+z=> verify signature(key)
+
+//this token is given to client from server
+
+//jwt authentication flow=>
+//server has private api's(protected)=> so client can't directly access api's of server => so client need to authenticate with server
+=>1. client send post/authenticate request with username & password
+=>2. server validate username & password(search in db & check whether user with this password is present in db, if present validate that user, generate JWT using secret key)
+=>3. return generated JWT token(from Server) to client ,(client store it in local storage or cookies)
+=>4. now, client send Get/data with JWT token in the header
+=>5. server received request from client/user & check for jwt token in header & fetch token & validate JWT token using secret key
+=>6. return the response to access data/api/information(successful operation)
+
+//for jwt implementation=>1. add jwt dependencies
+//make sure that you have spring-boot security dependency in it
+//2.create class jwtauthentication that implement AuthenticationEntryPoint(interface) , method(commence method) of this class is called whenever exception is thrown due to unauthenticated user is trying to acccess the resource the required authentication
+//this method is basically for unauthenticated user(commence)
+//3.create JWTHelper class, which has jwt related features(utility methods)
+
+//create JwtAuthenticationFilter classs for authentication & validation=> this class run before accessing the api's , as it is filter
+
+//final step=> spring security configuration , so create class SecurityConfig for it
+
+//now create JWTRequest & JWTResponse to receive request data & send login success response
+
+//now create authcontroller & map that request to it
+//add bean in AppConfig
